@@ -1,0 +1,78 @@
+/* LAYOUT */
+:root {
+   --bg-gradient: linear-gradient(
+      120deg,
+      hsl(266, 10%, 90%),
+      hsl(243, 40%, 90%)
+   );
+   --bg-light: #fff;
+   --border: #fff;
+   /* --main-color: #fff; */
+}
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+html,
+body {
+   height: 100%;
+}
+
+body {
+   background: var(--bg-gradient) no-repeat fixed;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+/* MAIN SECTION */
+
+.main-container {
+   /* border: 2px solid; */
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 1rem;
+   width: 450px;
+   height: 450px;
+}
+
+
+
+/* SECTIONS */
+.container-options {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 1rem;
+   font-size: 1rem;
+   padding: 0 8px;
+   flex-shrink: 2;
+}
+
+.settings {
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+   width: 100%;
+   margin-top: 8px;
+}
+
+.container-grids {
+   display: flex;
+   flex-wrap: wrap;
+   flex-grow: 1;
+   width: 450px;
+   height: auto;
+   border: 2px solid rgb(72, 117, 72);
+}
+
+/* SQUARES */
+
+.grid-item{
+   border: 1px solid black;
+   flex-grow: 1;
+}
