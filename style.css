@@ -61,9 +61,10 @@ body {
 .container-grids {
    display: flex;
    flex-wrap: wrap;
-   flex-grow: 1;
-   width: 450px;
-   height: auto;
+   /* flex-grow: 1; */
+   width: 420px;
+   height: 500px;
+   outline: 1px solid black;
 }
 
 /* SQUARES */

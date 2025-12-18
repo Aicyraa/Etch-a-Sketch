@@ -8,7 +8,7 @@
    3. Mousehold or click to change bg color of each square
    
    ISSUE
-   1. How to change the number of grids but with the container size still the same
+   1. How to change the number of grids but with the container size still the same /
    2. How to make the color more darker when the mouse clicked on a square that already has a background color
    3. Paano mag papalit ng bg color
    4. paano mag ttrigger ung event listener habang naka click
@@ -17,16 +17,22 @@
 const gridContainer = document.querySelector(".container-grids");
 
 function setGrid(event) {
-   let squareGrid = event ? event.target.value : 16;
-   let containerWidth = gridContainer.clientWidth;
+   let squareGrid, containerWidth, squareSize
+   squareGrid = event ? event.target.value : 16;
+   containerWidth = gridContainer.clientWidth;
+   
    removeGrid();
    for (let squares = 0; squares < squareGrid * squareGrid; squares++) {
-      let squareSize = containerWidth / squareGrid;
       let square = document.createElement("div");
+      squareSize = containerWidth / squareGrid;
       square.setAttribute("class", "grid-item");
       square.style.width = `${squareSize}px`;
       square.style.height = `${squareSize}px`;
       gridContainer.appendChild(square)
+   }
+
+   if (gridContainer.lastElementChild.clientWidth > squareSize) {
+      gridContainer.lastElementChild.remove() // removes the extra square
    }
 }
 
