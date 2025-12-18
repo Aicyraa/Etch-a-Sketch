@@ -4,15 +4,21 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Etch a sketch</title>
-      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="style.css" />
    </head>
    <body>
       <div class="main-container">
          <div class="container-options">
             <div class="settings grid">
                <label for="grid">Grid Type</label>
-               <span id="grid-current-value"></span>
-               <input type="range" min="16" max="64" value="16" name="grid" id="grid" >
+               <span id="grid-current-value">16</span>
+               <input
+                  type="range"
+                  min="16"
+                  max="64"
+                  name="grid"
+                  id="grid"
+               />
             </div>
             <div class="settings color">
                <label for="color">Color Setting</label>
@@ -23,7 +29,7 @@
                </select>
             </div>
          </div>
-         <div class="container-grids" data-width=""></div>
+         <div class="container-grids"></div>
       </div>
    </body>
    <script src="main.js" defer></script>

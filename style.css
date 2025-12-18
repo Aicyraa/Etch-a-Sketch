@@ -29,7 +29,6 @@ body {
 }
 
 /* MAIN SECTION */
-
 .main-container {
    /* border: 2px solid; */
    display: flex;
@@ -39,8 +38,6 @@ body {
    width: 450px;
    height: 450px;
 }
-
-
 
 /* SECTIONS */
 .container-options {
@@ -67,11 +64,9 @@ body {
    flex-grow: 1;
    width: 450px;
    height: auto;
-   border: 2px solid rgb(72, 117, 72);
 }
 
 /* SQUARES */
-
 .grid-item{
    border: 1px solid black;
    flex-grow: 1;
