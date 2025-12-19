@@ -1,19 +1,3 @@
-/* 
-
-   OBJECTIVES
-   1. Have a .container containing 2 section
-      * section 1 contains the option such as grid size and color bg picker
-      * section for the squares
-   2. Create a 16x16 grid (default), grid limit is 100
-   3. Mousehold or click to change bg color of each square
-   
-   ISSUE
-   1. How to change the number of grids but with the container size still the same /
-   2. How to make the color more darker when the mouse clicked on a square that already has a background color
-   3. Paano mag papalit ng bg color
-   4. paano mag ttrigger ung event listener habang naka click
-*/
-
 function setGrid(container) {
    return function (event) {
       let squareGrid, containerWidth, squareSize;
@@ -43,65 +27,76 @@ function removeGrid() {
    });
 }
 
-function setBackground(container) { // attach the listeners for the container
+function setBackground(container) {
+   // attach the listeners for the container
    // check what is the color choice of the user
    const color = setBackgroundColor(checkColorChoice);
    container.addEventListener("mousedown", (e) => {
+      // hindi nalalagyan bg kung saan sya nag ddraw
+      color(e);
       container.addEventListener("mouseover", color);
-      console.log("mousedown!");
+      // console.log("mousedown!");
    });
 
    container.addEventListener("mouseup", (e) => {
       container.removeEventListener("mouseover", color);
-      console.log("mouseup!");
+      // console.log("mouseup!");
    });
 
+   // to prevent changing the background after the cursor leaves the container
    container.addEventListener("mouseleave", (e) => {
       container.removeEventListener("mouseover", color);
-      console.log("mouse leaves!");
+      // console.log("mouse leaves!");
    });
 }
 
-function setBackgroundColor(color) { // sets the background color
-   const colorChoice = color();
+function setBackgroundColor(setColor) {
+   // sets the background color
 
    return function (event) {
-      
+      let colorChoice = setColor();
       if (colorChoice === "#000000") {
-         console.log(colorChoice);
-         event.target.style.backgroundColor = colorChoice
+         event.target.style.backgroundColor = colorChoice;
+      } else if (colorChoice === "rainbow") {
+         let r, g, b;
+         r = Math.floor(Math.random(0) * 256);
+         g = Math.floor(Math.random(0) * 256);
+         b = Math.floor(Math.random(0) * 256);
+         event.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+      } else {
+         event.target.style.backgroundColor = colorChoice;
       }
-      console.log("Im moving!");
    };
 }
 
-function setToggle() { // set the listener for the toggle
+function setToggle() {
+   // set the listener for the toggle
    const buttons = document.querySelectorAll(".color-btn");
    for (let btn of buttons) {
       btn.addEventListener("click", (e) => {
          btn.classList.add("toggle");
+         if (btn.tagName === "INPUT") {
+            btn.nextElementSibling.classList.remove("toggle");
+         } else {
+            btn.previousElementSibling.classList.remove("toggle");
+         }
       });
    }
 }
 
 function checkColorChoice() {
    const buttons = document.querySelectorAll(".color-btn");
-   
-   for (let btn of buttons){
-      if (btn.classList.contains("toggle")){
-         console.log(btn);
-         return btn.value
+   for (let btn of buttons) {
+      if (btn.classList.contains("toggle")) {
+         return btn.value;
       }
    }
-
-   return '#000000'
+   return "#000000";
 }
-
-// when the user mousedown inside the container, it attaches the "mouseover" listener
-// when the user mousepress inside the container, it removes the "mousever" attached to it
 
 (function () {
    const container = document.querySelector(".container-grids");
+
    const rangeBtn = document.querySelector("#grid");
    rangeBtn.addEventListener("input", setGrid(container));
 

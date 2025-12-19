@@ -12,21 +12,11 @@
             <div class="settings grid">
                <label for="grid">Grid Type</label>
                <span id="grid-current-value">16</span>
-               <input
-                  type="range"
-                  min="16"
-                  max="64"
-                  name="grid"
-                  id="grid"
-               />
+               <input type="range" min="16" max="64" name="grid" id="grid" />
             </div>
             <div class="settings color">
-               <label for="color">Color Setting</label>
-               <select name="color" id="color">
-                  <option value="black">Black Only</option>
-                  <option value="rainbow">Rainbow</option>
-                  <option value="own">Own Color</option>
-               </select>
+               <input type="color" class="color-btn" id="own"> 
+               <button type="button" class="color-btn" value="rainbow" id> Rainbow </button>
             </div>
          </div>
          <div class="container-grids"></div>
