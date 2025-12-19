@@ -15,13 +15,12 @@
 */
 
 function setGrid(container) {
-
    return function (event) {
       let squareGrid, containerWidth, squareSize;
       squareGrid = event ? event.target.value : 16;
       containerWidth = container.clientWidth;
       console.log(squareGrid);
-      
+
       removeGrid();
       for (let squares = 0; squares < squareGrid * squareGrid; squares++) {
          let square = document.createElement("div");
@@ -45,10 +44,41 @@ function removeGrid() {
    });
 }
 
+function setBackground(container) {
+   // check if the mouse "mousedown" is true, and "mousepress" is false
+   // if yes, then change the background
+   // otherwise do nothing
+   const color = setBackgroundColor(document)
+   container.addEventListener("mousedown", (e) => {
+      container.addEventListener("mouseover", setBackgroundColor());
+      console.log("mousedown!");
+   });
+
+   container.addEventListener("mouseup", (e) => {
+      container.removeEventListener("mouseover", setBackgroundColor());
+      console.log("mouseup!");
+   });
+}
+
+function setBackgroundColor(color) {
+   const colorChoice = color;
+   return function (event) {
+      if (colorChoice === "own") {
+         document.get;
+      }
+      // console.log(event.currentTarget);
+      console.log("Im moving!");
+   };
+}
+
+// when the user mousedown inside the container, it attaches the "mouseover" listener
+// when the user mousepress inside the container, it removes the "mousever" attached to it
+
 (function () {
    const container = document.querySelector(".container-grids");
    const rangeBtn = document.querySelector("#grid");
-   rangeBtn.addEventListener("input", setGrid(container)); 
+   rangeBtn.addEventListener("input", setGrid(container));
 
+   setBackground(container);
    setGrid(container)();
 })();
