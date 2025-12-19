@@ -14,26 +14,28 @@
    4. paano mag ttrigger ung event listener habang naka click
 */
 
-const gridContainer = document.querySelector(".container-grids");
+function setGrid(container) {
 
-function setGrid(event) {
-   let squareGrid, containerWidth, squareSize
-   squareGrid = event ? event.target.value : 16;
-   containerWidth = gridContainer.clientWidth;
-   
-   removeGrid();
-   for (let squares = 0; squares < squareGrid * squareGrid; squares++) {
-      let square = document.createElement("div");
-      squareSize = containerWidth / squareGrid;
-      square.setAttribute("class", "grid-item");
-      square.style.width = `${squareSize}px`;
-      square.style.height = `${squareSize}px`;
-      gridContainer.appendChild(square)
-   }
+   return function (event) {
+      let squareGrid, containerWidth, squareSize;
+      squareGrid = event ? event.target.value : 16;
+      containerWidth = container.clientWidth;
+      console.log(squareGrid);
+      
+      removeGrid();
+      for (let squares = 0; squares < squareGrid * squareGrid; squares++) {
+         let square = document.createElement("div");
+         squareSize = containerWidth / squareGrid;
+         square.setAttribute("class", "grid-item");
+         square.style.width = `${squareSize}px`;
+         square.style.height = `${squareSize}px`;
+         container.appendChild(square);
+      }
 
-   if (gridContainer.lastElementChild.clientWidth > squareSize) {
-      gridContainer.lastElementChild.remove() // removes the extra square
-   }
+      if (container.lastElementChild.clientWidth > squareSize) {
+         container.lastElementChild.remove(); // removes the extra square
+      }
+   };
 }
 
 function removeGrid() {
@@ -44,8 +46,9 @@ function removeGrid() {
 }
 
 (function () {
+   const container = document.querySelector(".container-grids");
    const rangeBtn = document.querySelector("#grid");
-   rangeBtn.addEventListener("input", setGrid);
+   rangeBtn.addEventListener("input", setGrid(container)); 
 
-   setGrid();
+   setGrid(container)();
 })();
