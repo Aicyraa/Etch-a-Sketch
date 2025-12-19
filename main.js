@@ -55,16 +55,24 @@ function setBackgroundColor(setColor) {
 
    return function (event) {
       let colorChoice = setColor();
+      let element = event.target;
+
+      if (element.classList.contains("container-grids")) {
+         console.log("asdsa");
+         
+         return
+      }
+
       if (colorChoice === "#000000") {
-         event.target.style.backgroundColor = colorChoice;
+         element.style.backgroundColor = colorChoice;
       } else if (colorChoice === "rainbow") {
          let r, g, b;
          r = Math.floor(Math.random(0) * 256);
          g = Math.floor(Math.random(0) * 256);
          b = Math.floor(Math.random(0) * 256);
-         event.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+         element = `rgb(${r}, ${g}, ${b})`;
       } else {
-         event.target.style.backgroundColor = colorChoice;
+         element.style.backgroundColor = colorChoice;
       }
    };
 }
@@ -98,8 +106,11 @@ function checkColorChoice() {
    const container = document.querySelector(".container-grids");
 
    const rangeBtn = document.querySelector("#grid");
-   rangeBtn.addEventListener("input", setGrid(container));
-
+   rangeBtn.addEventListener("input", (e) => {
+      document.querySelector("#grid-current-value").textContent = e.target.value;
+      setGrid(container)(e);
+   });
+   
    setGrid(container)();
    setBackground(container);
    setToggle();

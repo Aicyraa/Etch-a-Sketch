@@ -1,13 +1,9 @@
-/* LAYOUT */
 :root {
-   --bg-gradient: linear-gradient(
-      120deg,
-      hsl(266, 10%, 90%),
-      hsl(243, 40%, 90%)
-   );
-   --bg-light: #fff;
-   --border: #fff;
-   /* --main-color: #fff; */
+   --bg: #f4f6f8;
+   --panel: #ffffff;
+   --border: #dcdfe3;
+   --accent: #4f46e5;
+   --text: #1f2937;
 }
 
 * {
@@ -19,57 +15,88 @@
 html,
 body {
    height: 100%;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body {
-   background: var(--bg-gradient) no-repeat fixed;
+   background: var(--bg);
    display: flex;
    align-items: center;
    justify-content: center;
+   color: var(--text);
 }
 
-/* MAIN SECTION */
+/* MAIN */
 .main-container {
-   /* border: 2px solid; */
+   background: var(--panel);
+   width: 460px;
+   padding: 1rem;
+   border-radius: 12px;
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
    display: flex;
    flex-direction: column;
-   align-items: center;
    gap: 1rem;
-   width: 450px;
-   height: 450px;
 }
 
-/* SECTIONS */
+/* OPTIONS */
 .container-options {
    display: flex;
-   justify-content: center;
-   align-items: center;
+   justify-content: space-between;
    gap: 1rem;
-   font-size: 1rem;
-   padding: 0 8px;
-   flex-shrink: 2;
 }
 
 .settings {
    display: flex;
    flex-direction: column;
-   text-align: center;
-   width: 100%;
-   margin-top: 8px;
+   gap: 0.4rem;
+   font-size: 0.85rem;
 }
 
+/* RANGE */
+.settings.grid span {
+   font-weight: 600;
+}
+
+input[type="range"] {
+   accent-color: var(--accent);
+}
+
+/* BUTTONS */
+.color-btn {
+   border: 1px solid var(--border);
+   background: #f9fafb;
+   padding: 0.4rem 0.6rem;
+   border-radius: 6px;
+   cursor: pointer;
+   transition: all 0.15s ease;
+}
+
+.color-btn:hover {
+   background: #eef2ff;
+}
+
+.color-btn.toggle {
+   background: var(--accent);
+   color: white;
+   border-color: var(--accent);
+}
+
+/* GRID */
 .container-grids {
+   width: 420px;
+   height: 420px;
+   border-radius: 8px;
+   border: 1px solid var(--border);
    display: flex;
    flex-wrap: wrap;
-   /* flex-grow: 1; */
-   width: 420px;
-   height: 500px;
-   outline: 1px solid black;
+   overflow: hidden;
+   background: white;
+   border: 1px solid hsl(0, 0%, 40%);
+
 }
 
-/* SQUARES */
+/* GRID CELLS */
 .grid-item {
-   /* border: 1px solid hsl(0, 0%, 40%); */
    flex-grow: 1;
-   color: rgb(red, green, blue);
+   /* border: 1px solid hsl(0, 0%, 50%); */
 }
