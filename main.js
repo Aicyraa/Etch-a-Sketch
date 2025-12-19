@@ -19,7 +19,6 @@ function setGrid(container) {
       let squareGrid, containerWidth, squareSize;
       squareGrid = event ? event.target.value : 16;
       containerWidth = container.clientWidth;
-      console.log(squareGrid);
 
       removeGrid();
       for (let squares = 0; squares < squareGrid * squareGrid; squares++) {
@@ -44,31 +43,58 @@ function removeGrid() {
    });
 }
 
-function setBackground(container) {
-   // check if the mouse "mousedown" is true, and "mousepress" is false
-   // if yes, then change the background
-   // otherwise do nothing
-   const color = setBackgroundColor(document)
+function setBackground(container) { // attach the listeners for the container
+   // check what is the color choice of the user
+   const color = setBackgroundColor(checkColorChoice);
    container.addEventListener("mousedown", (e) => {
-      container.addEventListener("mouseover", setBackgroundColor());
+      container.addEventListener("mouseover", color);
       console.log("mousedown!");
    });
 
    container.addEventListener("mouseup", (e) => {
-      container.removeEventListener("mouseover", setBackgroundColor());
+      container.removeEventListener("mouseover", color);
       console.log("mouseup!");
+   });
+
+   container.addEventListener("mouseleave", (e) => {
+      container.removeEventListener("mouseover", color);
+      console.log("mouse leaves!");
    });
 }
 
-function setBackgroundColor(color) {
-   const colorChoice = color;
+function setBackgroundColor(color) { // sets the background color
+   const colorChoice = color();
+
    return function (event) {
-      if (colorChoice === "own") {
-         document.get;
+      
+      if (colorChoice === "#000000") {
+         console.log(colorChoice);
+         event.target.style.backgroundColor = colorChoice
       }
-      // console.log(event.currentTarget);
       console.log("Im moving!");
    };
+}
+
+function setToggle() { // set the listener for the toggle
+   const buttons = document.querySelectorAll(".color-btn");
+   for (let btn of buttons) {
+      btn.addEventListener("click", (e) => {
+         btn.classList.add("toggle");
+      });
+   }
+}
+
+function checkColorChoice() {
+   const buttons = document.querySelectorAll(".color-btn");
+   
+   for (let btn of buttons){
+      if (btn.classList.contains("toggle")){
+         console.log(btn);
+         return btn.value
+      }
+   }
+
+   return '#000000'
 }
 
 // when the user mousedown inside the container, it attaches the "mouseover" listener
@@ -79,6 +105,7 @@ function setBackgroundColor(color) {
    const rangeBtn = document.querySelector("#grid");
    rangeBtn.addEventListener("input", setGrid(container));
 
-   setBackground(container);
    setGrid(container)();
+   setBackground(container);
+   setToggle();
 })();
